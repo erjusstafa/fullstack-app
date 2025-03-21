@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_components_menus",
+  "info": {
+    "displayName": "Menu",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "children": {
+      "type": "json"
+    }
+  }
+}

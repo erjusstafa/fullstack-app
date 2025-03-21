@@ -1,0 +1,26 @@
+.menu_eshop_right{
+    margin-right: 1rem;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+     cursor: pointer;
+     &_cart {
+      position: relative;
+  
+      span{
+        position: absolute;
+        top: 0px;
+        background: #f5b01a;
+        color: #fff;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 15px;
+        right: -3px;
+        font-size: 9px;
+        font-weight: normal;
+    
+      }
+     }
+  }

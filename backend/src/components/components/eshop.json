@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_components_eshops",
+  "info": {
+    "displayName": "eshop",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "media": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "marka": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

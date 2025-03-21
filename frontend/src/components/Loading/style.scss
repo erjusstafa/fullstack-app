@@ -1,0 +1,25 @@
+ .loading-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+   
+    .slider {
+      width: 50px;
+      height: 4px;
+      background-color: #007bff;  
+      animation: slide 1.5s infinite ease-in-out;
+    }
+  
+    @keyframes slide {
+      0% {
+        transform: translateX(-100%);
+      }
+      50% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  }

@@ -1,0 +1,11 @@
+.container_company {
+  img {
+    min-width: 100%;
+  }
+
+  .card_container_company {
+    display: flex;
+    gap: 2rem;
+    padding: 5rem;
+  }
+}

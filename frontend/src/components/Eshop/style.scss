@@ -1,0 +1,8 @@
+
+.eshop_card_container.eshop_card_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 2rem 0.5rem;
+  cursor: pointer;
+}

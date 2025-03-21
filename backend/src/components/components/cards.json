@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_components_cards",
+  "info": {
+    "displayName": "Cards"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "img": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "more": {
+      "type": "string"
+    }
+  }
+}

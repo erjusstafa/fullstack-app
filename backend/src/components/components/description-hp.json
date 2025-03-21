@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_components_description_hps",
+  "info": {
+    "displayName": "descriptionHP",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "mainTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

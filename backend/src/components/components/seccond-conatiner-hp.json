@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_components_seccond_conatiner_hps",
+  "info": {
+    "displayName": "seccondConatinerHP",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}

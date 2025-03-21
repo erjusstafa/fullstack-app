@@ -1,0 +1,26 @@
+.container__footer {
+
+ padding: 0 4rem;
+
+
+  
+ background-color: #662e8f;
+ color: white;
+ display: flex;
+ align-content: center;
+ justify-content: space-between;
+ align-items: center;
+  .mainTitle {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 1rem 0;
+    display: block;
+    color: #f1b11b;
+  }
+  
+  .list_item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}

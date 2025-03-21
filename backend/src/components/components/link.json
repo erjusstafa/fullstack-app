@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_links",
+  "info": {
+    "displayName": "LinkFooter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "mainTitle": {
+      "type": "string"
+    }
+  }
+}
