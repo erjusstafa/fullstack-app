@@ -1,7 +1,12 @@
 export interface RegisterUserProps {
-    identifier: string;
-    password: string;
-    email: string;
+  username: string;
+  password: string;
+  email: string;
+  lastName?: string;
+  phone?: string;
+  title?: string;
+  gender?: string;
+  birthdate?: string;
   }
   
   export  interface LoginUserProps {

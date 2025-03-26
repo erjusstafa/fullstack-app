@@ -31,17 +31,12 @@ function Login() {
     }
   };
 
-  /*   useEffect(() => {
-    if (user) {
-      console.log("User state updated:", user);
-    }
-  }, [user]); */
 
   return (
     <React.Fragment>
       {user ? (
         <div className="auth_container">
-          <h1>Hello, {user.username}</h1>
+          <h1>Welcome, {user.username}</h1>
         </div>
       ) : (
         <div className="auth_container">

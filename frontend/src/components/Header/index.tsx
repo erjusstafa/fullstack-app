@@ -5,7 +5,8 @@ import { ApiResponseHeader, HeaderLink } from "./types";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import { useEshopData } from "../../contextApi/EshopData";
- 
+
+
 const Header = () => {
   const [headerData, setHeaderData] = useState<ApiResponseHeader | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

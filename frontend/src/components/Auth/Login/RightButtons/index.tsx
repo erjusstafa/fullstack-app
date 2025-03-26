@@ -6,11 +6,9 @@ function RightButtons() {
       <h2>Nuk keni një llogari?</h2>
 
       <div className="auth_buttons">
-        <button className="register">
-          <Link to={"/selfcare/register"} className="register">
-            REGJISTROHU
-          </Link>
-        </button>
+        <Link to={"/selfcare/register"} className="auth_buttons_register">
+             REGJISTROHU
+         </Link>
 
         <div className="divider">
           <hr />
@@ -18,7 +16,7 @@ function RightButtons() {
           <hr />
         </div>
 
-        <button className="guest">VAZHDO SI VIZITOR</button>
+        <button className="auth_buttons_guest">VAZHDO SI VIZITOR</button>
       </div>
     </div>
   );

@@ -10,13 +10,19 @@ export async function registerUserService(userData: RegisterUserProps) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...userData }),
+      body: JSON.stringify(userData),
       cache: "no-cache",
     });
 
-    return response.json();
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Registration failed');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error("Registration Service Error:", error);
+    throw error; // Re-throw to handle in component
   }
 }
 

@@ -1,5 +1,4 @@
 .auth_container_guest {
-
   align-items: flex-start;
   padding: 2rem;
   flex: 0 0 50%;
@@ -9,7 +8,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #000;
-   }
+  }
 
   .auth_buttons {
     display: flex;
@@ -19,7 +18,28 @@
     gap: 1rem;
     margin-top: 1.5rem;
 
-    button {
+    &_register {
+      background-color: #6a1b9a;
+      color: #fff;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s ease-in-out;
+      text-align: center;
+      &:hover {
+        background-color: #fff;
+        color: #6a1b9a;
+        border: 1px solid gray;
+      }
+    }
+
+    &_guest {
+      background-color: #fbc02d;
+      color: #fff;
       width: 100%;
       padding: 0.5rem;
       font-size: 0.8rem;
@@ -29,26 +49,10 @@
       border: none;
       transition: 0.3s ease-in-out;
 
-      &.register {
-        background-color: #6a1b9a;
-        color: #fff;
-
-        &:hover {
-          background-color: #fff;
-          color: #6a1b9a;
-          border: 1px solid gray;
-        }
-      }
-
-      &.guest {
-        background-color: #fbc02d;
-        color: #fff;
-
-        &:hover {
-          background-color: #fff;
-          color: #f9a825;
-          border: 1px solid gray;
-        }
+      &:hover {
+        background-color: #fff;
+        color: #f9a825;
+        border: 1px solid gray;
       }
     }
   }
