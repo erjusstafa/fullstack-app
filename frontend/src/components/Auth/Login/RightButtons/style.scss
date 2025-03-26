@@ -1,0 +1,78 @@
+.auth_container_guest {
+
+  align-items: flex-start;
+  padding: 2rem;
+  flex: 0 0 50%;
+  max-width: 50%;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+   }
+
+  .auth_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    button {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s ease-in-out;
+
+      &.register {
+        background-color: #6a1b9a;
+        color: #fff;
+
+        &:hover {
+          background-color: #fff;
+          color: #6a1b9a;
+          border: 1px solid gray;
+        }
+      }
+
+      &.guest {
+        background-color: #fbc02d;
+        color: #fff;
+
+        &:hover {
+          background-color: #fff;
+          color: #f9a825;
+          border: 1px solid gray;
+        }
+      }
+    }
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    width: 18rem;
+    margin: 1rem 0;
+
+    hr {
+      flex-grow: 1;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+
+    span {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 0.1rem 0.5rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 20px;
+      margin: 0 0.5rem;
+    }
+  }
+}

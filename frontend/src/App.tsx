@@ -16,6 +16,9 @@ const Individ = React.lazy(() => import("./components/Individ"));
 const Biznes = React.lazy(() => import("./components/Biznes"));
 const Kompania = React.lazy(() => import("./components/Kompania"));
 const Eshop = React.lazy(() => import("./components/Eshop"));
+const Login = React.lazy(() => import("./components/Auth/Login"));
+const Register = React.lazy(() => import("./components/Auth/Register"));
+
 const EshopDetailsItem = React.lazy(
   () => import("./components/Eshop/EshopDetailsItem")
 );
@@ -43,6 +46,9 @@ function App() {
         ) : (
           <Routes location={location}>
             <Route path="/" element={<Individ />} />
+            <Route path="/selfcare/login" element={<Login />} />
+            <Route path="/selfcare/register" element={<Register />} />
+
             <Route path="/business" element={<Biznes />} />
             <Route path="/company" element={<Kompania />} />
             <Route path="/eshop" element={<Eshop />} />

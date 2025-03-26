@@ -369,6 +369,31 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAuthAuth extends Struct.SingleTypeSchema {
+  collectionName: 'auths';
+  info: {
+    displayName: 'Auth';
+    pluralName: 'auths';
+    singularName: 'auth';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::auth.auth'> &
+      Schema.Attribute.Private;
+    menu: Schema.Attribute.Component<'components.menu', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBusinessPageBusinessPage extends Struct.SingleTypeSchema {
   collectionName: 'business_pages';
   info: {
@@ -1141,6 +1166,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::auth.auth': ApiAuthAuth;
       'api::business-page.business-page': ApiBusinessPageBusinessPage;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
       'api::e-shop-test.e-shop-test': ApiEShopTestEShopTest;

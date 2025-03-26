@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "auths",
+  "info": {
+    "singularName": "auth",
+    "pluralName": "auths",
+    "displayName": "Auth"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "menu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.menu"
+    }
+  }
+}

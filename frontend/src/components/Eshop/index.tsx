@@ -18,7 +18,7 @@ function Eshop() {
 
 
   const { language } = useLanguage();
-  const { data, setData, filteredData,markaFilters, setMarkaFilters,  ratingFilters, setRatingFilters, colorFilters,  setColorFilters} = useEshopData();
+  const { data, setData, filteredData,markaFilters, setMarkaFilters,  ratingFilters, setRatingFilters, colorFilters,  setColorFilters, detailData } = useEshopData();
 
   useEffect(() => {
     handleCustomAPI(`eshops?populate=*&locale=${language}`, "GET")
@@ -80,7 +80,7 @@ function Eshop() {
           />
         </div>
 
-        <RightMenu type="openCart"  />
+        <RightMenu type="openCart"  detailData={detailData}   />
       </div>
 
       <div className="eshop_card_container">

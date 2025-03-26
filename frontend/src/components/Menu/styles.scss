@@ -1,5 +1,19 @@
-.menu__container{
-    display: flex;
-     height: 4rem;
-    align-items: center;
+.header_menu__container {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+}
+
+.auth_menu__container {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  position: absolute;
+  width: max-content;
+  left: -6rem;
+  top: 1rem;
+  box-shadow: 3px 11px 20px 1px #929395;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 2px;
 }

@@ -35,11 +35,11 @@ export const MenuItem: React.FC<{ item: menuInteface; level: number }> = ({
             top: level === 2 ? "0rem" : "4rem",
           }}
         >
-          {item.children.map((child, index) =>
-            child.title ? (
+          {item.children.map((child, index) =>{
+           return child.title ? (
               <MenuItem key={index} item={child} level={level + 1} />
             ) : null
-          )}
+          })}
         </div>
       )}
     </div>

@@ -12,11 +12,10 @@ import RightMenu from "../RightMenu";
 
 function EshopDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
-  const [detailData, setDetailData] = useState<Product | null>(null);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { language } = useLanguage();
-  const { addProductToCart } = useEshopData();
+  const { addProductToCart, detailData, setDetailData } = useEshopData();
 
   useEffect(() => {
     if (documentId) {

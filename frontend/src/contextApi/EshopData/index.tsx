@@ -8,6 +8,7 @@ const EshopContext = createContext<EshopContextType | null>(null);
 
 export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<interfaceEshop | null>(null);
+  const [detailData, setDetailData] = useState<Product | null>(null);
   const [inputsearch, setinputSearch] = useState<string>("");
   const [cart, setCart] = useState< Product[]>([]);
 
@@ -61,6 +62,8 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
         setColorFilters,
         cart,
         setCart,
+        detailData,
+        setDetailData,
         addProductToCart
       }}
     >
