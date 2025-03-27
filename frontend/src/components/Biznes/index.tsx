@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { handleCustomAPI } from "../../api";
 import WelcomeMessage from "../Individ/WelcomeMessage";
- import Slider from "../Individ/Slider";
+import Slider from "../Individ/Slider";
 import { DocumentDataBusiness } from "./types";
 import { SecondContainer } from "./SecondContainer";
+import { Menu } from "../Menu";
 
 const Biznes = () => {
   const [data, setData] = useState<DocumentDataBusiness | null>(null);
@@ -26,10 +27,12 @@ const Biznes = () => {
     <div>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <h1>Biznes</h1>
 
-      {data?.data.sl && <Slider sliders={data?.data?.sl} />}  
-      {data?.data.sc && <SecondContainer imgs = {data.data.sc} /> }
+      {data?.data.menu && <Menu data={data?.data?.menu} type="header_menu" />}
+
+      {data?.data.sl && <Slider sliders={data?.data?.sl} />}
+      {data?.data.sl && <Slider sliders={data?.data?.sl} />}
+      {data?.data.sc && <SecondContainer imgs={data.data.sc} />}
       {data?.data.wlc && <WelcomeMessage wlc={data?.data.wlc} />}
     </div>
   );

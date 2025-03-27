@@ -415,6 +415,7 @@ export interface ApiBusinessPageBusinessPage extends Struct.SingleTypeSchema {
       'api::business-page.business-page'
     > &
       Schema.Attribute.Private;
+    menu: Schema.Attribute.Component<'components.menu', true>;
     publishedAt: Schema.Attribute.DateTime;
     sc: Schema.Attribute.Component<'components.seccond-conatiner-hp', true>;
     sl: Schema.Attribute.Component<'components.slider', true>;
@@ -448,44 +449,6 @@ export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
       'api::company-page.company-page'
     > &
       Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiEShopTestEShopTest extends Struct.SingleTypeSchema {
-  collectionName: 'e_shop_tests';
-  info: {
-    description: '';
-    displayName: 'eShopTest';
-    pluralName: 'e-shop-tests';
-    singularName: 'e-shop-test';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    data: Schema.Attribute.Component<'components.eshop', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::e-shop-test.e-shop-test'
-    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1169,7 +1132,6 @@ declare module '@strapi/strapi' {
       'api::auth.auth': ApiAuthAuth;
       'api::business-page.business-page': ApiBusinessPageBusinessPage;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
-      'api::e-shop-test.e-shop-test': ApiEShopTestEShopTest;
       'api::eshop.eshop': ApiEshopEshop;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;

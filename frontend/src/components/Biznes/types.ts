@@ -1,9 +1,12 @@
+import { menuInteface } from "../Individ/types";
+
 export interface DocumentDataBusiness {
   data: {
     title: string;
     sl: sliderInterface[];
     wlc: welcomeSmsInterface;
     sc: secondContainerType[];
+    menu: menuInteface[];
   };
 }
 

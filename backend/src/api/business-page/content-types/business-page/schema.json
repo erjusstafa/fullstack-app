@@ -29,6 +29,11 @@
       "repeatable": false,
       "component": "components.description-hp",
       "pluginOptions": {}
+    },
+    "menu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.menu"
     }
   }
 }
