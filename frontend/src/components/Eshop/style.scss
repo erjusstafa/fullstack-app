@@ -1,8 +1,34 @@
-
-.eshop_card_container.eshop_card_container {
+.eshop_card_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   padding: 2rem 0.5rem;
   cursor: pointer;
+
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.filter_eshop_container {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 }

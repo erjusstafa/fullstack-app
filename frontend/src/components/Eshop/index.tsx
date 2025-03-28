@@ -16,9 +16,19 @@ function Eshop() {
   const [error, setError] = useState<string | null>(null);
   const [filterLoading, setFilterLoading] = useState<boolean>(false);
 
-
   const { language } = useLanguage();
-  const { data, setData, filteredData,markaFilters, setMarkaFilters,  ratingFilters, setRatingFilters, colorFilters,  setColorFilters, detailData } = useEshopData();
+  const {
+    data,
+    setData,
+    filteredData,
+    markaFilters,
+    setMarkaFilters,
+    ratingFilters,
+    setRatingFilters,
+    colorFilters,
+    setColorFilters,
+    detailData,
+  } = useEshopData();
 
   useEffect(() => {
     handleCustomAPI(`eshops?populate=*&locale=${language}`, "GET")
@@ -31,7 +41,6 @@ function Eshop() {
         setLoading(false);
       });
   }, [language]);
-
 
   useEffect(() => {
     if (
@@ -50,17 +59,10 @@ function Eshop() {
   }, [markaFilters, colorFilters, ratingFilters]);
 
   return (
-    <div style={{maxWidth: "95%", margin:"auto"}}>
+    <div style={{ maxWidth: "95%", margin: "auto" }}>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: ".6rem",
-        }}
-      >
+      <div className="filter_eshop_container">
         <div style={{ display: "flex", gap: ".6rem" }}>
           <FilterEshop
             onFilterChange={setMarkaFilters}
@@ -80,7 +82,7 @@ function Eshop() {
           />
         </div>
 
-        <RightMenu type="openCart"  detailData={detailData}   />
+        <RightMenu type="openCart" detailData={detailData} />
       </div>
 
       <div className="eshop_card_container">

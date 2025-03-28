@@ -2,89 +2,114 @@
   width: 100%;
   padding: 2rem 1rem;
   margin: 0 auto;
+  display: grid;
+  gap: 2rem;
 
-  display: flex;
-  flex-direction: row;
-  column-gap: 2rem;
-  justify-content: space-between;
-  align-items: center;
-  @media (min-width: 1200px) {
-    width: calc(100% - 30rem);
-  }
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
 
-  @media (max-width: 1200px) {
-    width: calc(100% - 5rem);
-  }
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 
-  @media (max-width: 992px) {
     width: calc(100% - 4rem);
+    max-width: 1200px;
   }
 
-  @media (max-width: 768px) {
-    width: calc(100% - 3rem);
-  }
-  @media (max-width: 576px) {
-    width: calc(100% - 2rem);
+  > h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    @media (min-width: 992px) {
+      text-align: left;
+    }
   }
 
-  &_form,
-  &_button {
-    display: inherit;
-    flex-direction: column;
-    line-height: 3;
-    h1{
-      font-weight: 700;
+  &_form {
+ /*    display: grid;
+    gap: 1.5rem;
+ */
+    h1 {
       font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
     }
 
     &_username,
     &_password {
-      display: inline-grid;
-      width: 100%;
+      display: grid;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      label {
+        font-weight: 600;
+      }
+
       input {
-        display: block;
-        width: inherit;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
+        width: 100%;
+        padding: 0.5rem;
         border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+
         &:focus {
           outline: none;
+          border-color: #6a1b9a;
+          box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.2);
         }
       }
     }
   }
-
-  &_button {
-    width: 100%;
-    padding: 0.1rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s ease-in-out;
-    background-color: #6a1b9a;
-    color: #fff;
-    margin-top: 1.5rem;
-    &:hover {
-      background-color: #fff;
-      color: #6a1b9a;
-      border: 1px solid gray;
-    }
-  }
-
-  &_forgot_password{
-    margin-left: auto;
-    width: max-content;
-    font-size: .9rem;
+  &_forgot_password {
+    text-align: right;
+    font-size: 0.9rem;
     color: #7a7c7e;
     font-weight: 600;
     cursor: pointer;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &_button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #5a148a;
+    }
+
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
+
+  .error_message {
+    color: #dc3545;
+    font-weight: 600;
+    padding: 0.5rem;
+    background-color: #f8d7da;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+}
+
+.auth_container > .right_buttons {
+  display: flex;
+  justify-content: center;
+  @media (min-width: 992px) {
+    justify-content: flex-end;
   }
 }

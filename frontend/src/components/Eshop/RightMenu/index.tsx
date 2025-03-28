@@ -19,7 +19,8 @@ function RightMenu({
 }) {
   const [linkAuth, setLinkAuth] = useState<DocumentData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [open, setOpen] = useState<boolean>(false);
+  const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
+  const [cartOpen, setCartOpen] = useState<boolean>(false);
   const { cart } = useEshopData();
 
   const handleAuthApi = () => {
@@ -34,8 +35,14 @@ function RightMenu({
   };
 
   const handleUserIconClick = () => {
-    setOpen((prev) => !prev);
-    if (!open) handleAuthApi();
+    setUserMenuOpen((prev) => !prev);
+    if (!userMenuOpen) handleAuthApi();
+    setCartOpen(false);
+  };
+
+  const handleCartClick = () => {
+    setCartOpen((prev) => !prev);
+    setUserMenuOpen(false); 
   };
 
   return (
@@ -45,16 +52,18 @@ function RightMenu({
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="menu_eshop_right_submenu_container">
-        {open && linkAuth?.data.menu && <Menu data={linkAuth?.data?.menu}  type="auth_menu"/>}
+        {userMenuOpen && linkAuth?.data.menu && (
+          <Menu data={linkAuth?.data?.menu} type="auth_menu" />
+        )}
       </div>
 
-      <div className="menu_eshop_right_cart" onClick={() => setOpen(true)}>
+      <div className="menu_eshop_right_cart" onClick={handleCartClick}>
         <TiShoppingCart color="#662e8f" fontSize={34} />
         <span>{cart.length}</span>
       </div>
 
-      {open && cart && type && detailData && (
-        <DialogCart detailData={detailData} setOpenDialog={setOpen} />
+      {cartOpen && cart && type && detailData && (
+        <DialogCart detailData={detailData} setOpenDialog={setCartOpen} />
       )}
 
       <div>

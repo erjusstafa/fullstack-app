@@ -41,7 +41,7 @@ const Footer = () => {
       <div className=" ">
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <div style={{ display: "flex", gap: "20px" }}>
+        <div style={{ display: "flex", gap: "20px" , padding:"0 3rem"}}>
           {Object.entries(groupedData).map(([mainTitle, links], index) => (
              <Fragment key={index}>
               <FooterCard   mainTitle={mainTitle} items={links} />

@@ -12,7 +12,7 @@ export const MenuItem: React.FC<{ item: menuInteface; level: number }> = ({
   return (
     <div
       style={{
-        padding: "0 2rem",
+        padding: "0 1rem",
         position: "relative",
         height: "100%",
         display: "grid",
@@ -20,7 +20,7 @@ export const MenuItem: React.FC<{ item: menuInteface; level: number }> = ({
         cursor: "pointer",
       }}
       onMouseOver={() => setOpen(true)}
-    onMouseLeave={() => setOpen(false)} 
+    onMouseLeave={() => setOpen(false)}  
     >
       <div>
         <Link to={item.url} style={{ textDecoration: "none", color: "black" }}>
@@ -31,14 +31,14 @@ export const MenuItem: React.FC<{ item: menuInteface; level: number }> = ({
         <div
           className="submenu_container"
           style={{
-            left: level === 2 ? "10rem" : "0.5rem",
+            left: level === 2 ? "10rem" : "-1.8rem",
             top: level === 2 ? "0rem" : "4rem",
           }}
         >
-          {item.children.map((child, index) =>{
-           return child.title ? (
+          {item.children.map((child, index) => {
+            return child.title ? (
               <MenuItem key={index} item={child} level={level + 1} />
-            ) : null
+            ) : null;
           })}
         </div>
       )}

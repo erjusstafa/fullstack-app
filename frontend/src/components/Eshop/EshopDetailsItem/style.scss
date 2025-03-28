@@ -2,10 +2,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 40px;
-  height: 100vh;
+ 
+   grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  align-items: start;
+
+   @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+  }
  
   .product_image {
     flex: 1;
