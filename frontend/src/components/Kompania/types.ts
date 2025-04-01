@@ -1,18 +1,21 @@
+import { menuInteface } from "../Individ/types";
+
 export interface DocumentDataCompany {
-    data: {
-       img : sliderInterface;
-       cards: cardsInterface;
-    };
-  }
-  
-  export interface sliderInterface {
-    url: string;
-  }
-  
- 
-  export interface cardsInterface {
-    title: string;
-    img : string;
-    description: string;
-    more?: null 
-  }
+  data: {
+    menu: menuInteface[];
+
+    img: sliderInterface;
+    cards: cardsInterface;
+  };
+}
+
+export interface sliderInterface {
+  url: string;
+}
+
+export interface cardsInterface {
+  title: string;
+  img: string;
+  description: string;
+  more?: null;
+}

@@ -15,7 +15,7 @@ function EshopDetailsItem() {
    const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { language } = useLanguage();
-  const { addProductToCart, detailData, setDetailData } = useEshopData();
+  const { addProductToCart, detailData, setDetailData,cart } = useEshopData();
 
   useEffect(() => {
     if (documentId) {
@@ -92,7 +92,7 @@ function EshopDetailsItem() {
             }}
           />
 
-          {openDialog && <DialogCart detailData={detailData} setOpenDialog={setOpenDialog} />}
+          {openDialog && cart.length > 0 &&  <DialogCart setOpenDialog={setOpenDialog} />}
         </div>
       </div>
     </>

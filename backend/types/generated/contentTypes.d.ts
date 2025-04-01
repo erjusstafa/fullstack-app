@@ -449,6 +449,7 @@ export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
       'api::company-page.company-page'
     > &
       Schema.Attribute.Private;
+    menu: Schema.Attribute.Component<'components.menu', true>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

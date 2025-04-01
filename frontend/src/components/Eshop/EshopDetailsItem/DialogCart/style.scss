@@ -10,7 +10,9 @@
   place-content: center;
 
   &_container {
-  width:450px;
+    width: 31rem;
+     height: 36rem;
+    overflow-y: scroll;
     background-color: white;
     &_header {
       display: flex;

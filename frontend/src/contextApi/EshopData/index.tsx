@@ -44,6 +44,13 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
     console.log('----product----', product);
     
   };
+
+  const removeProductToCart = (id: number) => {
+    setCart((prevCart) =>  prevCart.filter((item) => item.id !== id));
+    
+  };
+  console.log('++++++++++', cart);
+
   
 
   return (
@@ -64,7 +71,8 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
         setCart,
         detailData,
         setDetailData,
-        addProductToCart
+        addProductToCart,
+        removeProductToCart
       }}
     >
       {children}

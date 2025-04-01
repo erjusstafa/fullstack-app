@@ -52,7 +52,7 @@ function RightMenu({
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="menu_eshop_right_submenu_container">
-        {userMenuOpen && linkAuth?.data.menu && (
+        {userMenuOpen && linkAuth?.data.menu  && (
           <Menu data={linkAuth?.data?.menu} type="auth_menu" />
         )}
       </div>
@@ -62,8 +62,8 @@ function RightMenu({
         <span>{cart.length}</span>
       </div>
 
-      {cartOpen && cart && type && detailData && (
-        <DialogCart detailData={detailData} setOpenDialog={setCartOpen} />
+      {cartOpen && cart.length > 0 && type && detailData && (
+        <DialogCart setOpenDialog={setCartOpen} />
       )}
 
       <div>

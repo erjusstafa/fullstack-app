@@ -17,4 +17,5 @@ export interface EshopContextType {
   detailData: Product | null;
   setDetailData: React.Dispatch<React.SetStateAction<Product | null>>;
   addProductToCart: (product: Product) => void;
+  removeProductToCart :(id: number) => void;
 }

@@ -1,28 +1,43 @@
-$breakpoint-medium: 768px;
-$breakpoint-small: 480px;
 $grid-gap: 2rem;
 $card-min-width: 300px;
 $card-min-width-medium: 250px;
+$breakpoint-medium: 768px;
+$breakpoint-small: 480px;
 
 .container_company {
   img {
     min-width: 100%;
+    height: auto;
   }
 
   .card_container_company {
     display: grid;
     gap: $grid-gap;
     padding: 2rem;
-    grid-template-columns: repeat(auto-fill, minmax($card-min-width, 1fr));
-  
+    grid-template-columns: repeat(auto-fit, minmax($card-min-width, 1fr));
+    justify-content: center;
     @media (max-width: $breakpoint-medium) {
-      grid-template-columns: repeat(auto-fill, minmax($card-min-width-medium, 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax($card-min-width-medium, 1fr)
+      );
       padding: 1.5rem;
     }
-  
+
     @media (max-width: $breakpoint-small) {
       grid-template-columns: 1fr;
       padding: 1rem;
+      gap: 1rem;
+    }
+
+    > * {
+      max-width: 100%;
+      box-sizing: border-box;
+
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
   }
 }

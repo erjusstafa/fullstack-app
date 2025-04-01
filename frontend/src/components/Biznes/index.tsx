@@ -31,7 +31,6 @@ const Biznes = () => {
       {data?.data.menu && <Menu data={data?.data?.menu} type="header_menu" />}
 
       {data?.data.sl && <Slider sliders={data?.data?.sl} />}
-      {data?.data.sl && <Slider sliders={data?.data?.sl} />}
       {data?.data.sc && <SecondContainer imgs={data.data.sc} />}
       {data?.data.wlc && <WelcomeMessage wlc={data?.data.wlc} />}
     </div>

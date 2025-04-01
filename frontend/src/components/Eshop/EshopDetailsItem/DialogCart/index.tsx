@@ -1,7 +1,11 @@
 import { DialogBoxInterface } from "./types";
 import "./style.scss";
+import { useEshopData } from "../../../../contextApi/EshopData";
+import React from "react";
 
-function DialogCart({ detailData, setOpenDialog }: DialogBoxInterface) {
+function DialogCart({ setOpenDialog }: DialogBoxInterface) {
+  const { removeProductToCart, cart } = useEshopData();
+
   return (
     <div className="dialog_cart">
       <div className="dialog_cart_container">
@@ -10,23 +14,29 @@ function DialogCart({ detailData, setOpenDialog }: DialogBoxInterface) {
           <span onClick={() => setOpenDialog(false)}>x</span>
         </div>
         <div className="dialog_cart_container_title">
-          <p>Duke shfaqur 1 nga x Artikujt</p>
+          <p>Duke shfaqur 1 nga {cart.length} Artikujt</p>
           &nbsp;
-          <a>Shfaqi të gjitha</a>
+          <a href="#">Shfaqi të gjitha</a>
         </div>
-        <hr  style={{color : "rgb(196, 194, 194)"}}/>
-        <div className="dialog_cart_container_bodyDetails">
-          <h5>{detailData.eshop.name}</h5>
-          <p>Sasia : {detailData.eshop.rating}</p>
-        </div>
-        <div className="dialog_cart_container_bodyPrice">
-          <span>Paguaj ne perfundim</span>
-          <p>{detailData.eshop.price}</p>
-        </div>
-        <div className="dialog_cart_container_button">
-          <button>Blej</button>
-          <button>Vazhdo blerjen</button>
-        </div>
+        <hr style={{ color: "rgb(196, 194, 194)" }} />
+        {cart.map((item) => (
+          <React.Fragment key={item.id}>
+            <div className="dialog_cart_container_bodyDetails">
+              <h5>{item.eshop.name}</h5>
+              <p>Sasia: {item.eshop.rating}</p>
+            </div>
+            <div className="dialog_cart_container_bodyPrice">
+              <span>Paguaj ne perfundim</span>
+              <p>{item.eshop.price}</p>
+            </div>
+            <div className="dialog_cart_container_button">
+              <button>Blej</button>
+              <button>Vazhdo blerjen</button>
+              <button onClick={() => removeProductToCart(item.id)}>del</button>
+            </div>
+            <hr style={{ color: "rgb(196, 194, 194)" }} />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

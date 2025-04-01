@@ -20,6 +20,11 @@
       "type": "component",
       "repeatable": true,
       "component": "components.cards"
+    },
+    "menu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.menu"
     }
   }
 }
