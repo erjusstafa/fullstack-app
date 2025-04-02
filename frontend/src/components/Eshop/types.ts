@@ -11,10 +11,10 @@ export interface Product {
     description: string;
     media: string;
     price: number;
-    rating: string;
+    rating?: string;
     type: string;
     name: string;
-    marka: string;
-    color: string;
+    marka?: string;
+    color?: string;
   };
 }

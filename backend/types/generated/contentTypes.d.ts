@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiAuthAuth extends Struct.SingleTypeSchema {
   collectionName: 'auths';
   info: {
+    description: '';
     displayName: 'Auth';
     pluralName: 'auths';
     singularName: 'auth';
@@ -450,6 +451,36 @@ export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     menu: Schema.Attribute.Component<'components.menu', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEshopPackageEshopPackage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'eshop_packages';
+  info: {
+    description: '';
+    displayName: 'EshopPackage';
+    pluralName: 'eshop-packages';
+    singularName: 'eshop-package';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    eshop: Schema.Attribute.Component<'components.eshop', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::eshop-package.eshop-package'
+    > &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1133,6 +1164,7 @@ declare module '@strapi/strapi' {
       'api::auth.auth': ApiAuthAuth;
       'api::business-page.business-page': ApiBusinessPageBusinessPage;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
+      'api::eshop-package.eshop-package': ApiEshopPackageEshopPackage;
       'api::eshop.eshop': ApiEshopEshop;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;

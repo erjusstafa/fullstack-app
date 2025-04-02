@@ -95,7 +95,7 @@ function Eshop() {
                 baseColor="rgb(231, 231, 231)"
               />
             ) : (
-              <Cards item={item} />
+              <Cards item={item} redirectToDetailItem={"eshop"} />
             )}
           </Fragment>
         ))}

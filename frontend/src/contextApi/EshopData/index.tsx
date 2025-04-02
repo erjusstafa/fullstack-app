@@ -25,15 +25,15 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
     } else {
       const matchesMarka =
         markaFilters.length > 0
-          ? markaFilters.includes(product.eshop.marka)
+          ? markaFilters.includes( product.eshop.marka || "")
           : true;
       const matchesColor =
         colorFilters.length > 0
-          ? colorFilters.includes(product.eshop.color)
+          ? colorFilters.includes(product.eshop.color  || "")
           : true;
       const matchesRating =
         ratingFilters.length > 0
-          ? ratingFilters.includes(product.eshop.rating)
+          ? ratingFilters.includes(product.eshop.rating  || "")
           : true;
       return matchesMarka && matchesColor && matchesRating;
     }
@@ -49,7 +49,6 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
     setCart((prevCart) =>  prevCart.filter((item) => item.id !== id));
     
   };
-  console.log('++++++++++', cart);
 
   
 

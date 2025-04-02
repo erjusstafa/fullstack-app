@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoadingSlider from "./components/Loading";
 import { MainContextProvider } from "./contextApi";
+import RightMenu from "./components/Eshop/RightMenu";
 
 // Lazy load the components
 const Individ = React.lazy(() => import("./components/Individ"));
@@ -18,6 +19,12 @@ const Kompania = React.lazy(() => import("./components/Kompania"));
 const Eshop = React.lazy(() => import("./components/Eshop"));
 const Login = React.lazy(() => import("./components/Auth/Login"));
 const Register = React.lazy(() => import("./components/Auth/Register"));
+const EshopPackage = React.lazy(
+  () => import("./components/Eshop/EshopPackage")
+);
+const EshopPackageDetailsItem = React.lazy(
+  () => import("./components/Eshop/EshopPackage/EshopPackageDetailsItem")
+);
 
 const EshopDetailsItem = React.lazy(
   () => import("./components/Eshop/EshopDetailsItem")
@@ -40,6 +47,7 @@ function App() {
   return (
     <>
       <Header />
+
       <Suspense fallback={null}>
         {isLoading ? (
           <LoadingSlider />
@@ -48,10 +56,14 @@ function App() {
             <Route path="/" element={<Individ />} />
             <Route path="/selfcare/login" element={<Login />} />
             <Route path="/selfcare/register" element={<Register />} />
-
             <Route path="/business" element={<Biznes />} />
             <Route path="/company" element={<Kompania />} />
             <Route path="/eshop" element={<Eshop />} />
+            <Route path="/eshop-package" element={<EshopPackage />} />
+            <Route
+              path="/eshop-packages/:documentId"
+              element={<EshopPackageDetailsItem />}
+            />
             <Route path="/eshop/:documentId" element={<EshopDetailsItem />} />
           </Routes>
         )}

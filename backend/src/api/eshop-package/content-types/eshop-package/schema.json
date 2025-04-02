@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "eshop_packages",
+  "info": {
+    "singularName": "eshop-package",
+    "pluralName": "eshop-packages",
+    "displayName": "EshopPackage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "eshop": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.eshop"
+    }
+  }
+}
