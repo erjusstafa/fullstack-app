@@ -1,6 +1,5 @@
-// EshopDetailsItem.tsx
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { Product } from "../types";
 import { handleCustomAPI } from "../../../api";
 import buyButton from "../../../assets/buynow.png";
@@ -9,52 +8,42 @@ import { useLanguage } from "../../../contextApi/LanguageContext";
 import { useEshopData } from "../../../contextApi/EshopData";
 import DialogCart from "./DialogCart";
 import RightMenu from "../RightMenu";
+import { useState } from "react";
 
 function EshopDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
-   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const { language } = useLanguage();
-  const { addProductToCart, detailData, setDetailData,cart } = useEshopData();
+  const { addProductToCart, detailData, setDetailData, cart } = useEshopData();
 
-  useEffect(() => {
-    if (documentId) {
-      const fetchData = async () => {
-        try {
-          const response = await handleCustomAPI(
-            `eshops?filters[documentId][$eq]=${documentId}&populate=*&locale=${language}`,
-            "GET"
-          );
-          if (response.data && response.data.length > 0) {
-            const product = response.data.find(
-              (item: Product) => item.documentId === documentId
-            );
-            if (product) {
-              setDetailData(product);
-            } else {
-              setError("No data found");
-            }
-          } else {
-            setError("No data found");
-          }
-        } catch (error) {
-          setError(
-            error instanceof Error ? error.message : "An error occurred"
-          );
-        }
-      };
+  // React Query for data fetching
+  const { isLoading, error } = useQuery<Product>({
+    queryKey: ['eshop-item', documentId, language],
+    queryFn: async () => {
+      if (!documentId) throw new Error("No document ID provided");
+      
+      const response = await handleCustomAPI(
+        `eshops?filters[documentId][$eq]=${documentId}&populate=*&locale=${language}`,
+        "GET"
+      ) as { data: Product[] };
+      
+      const product = response.data?.find(
+        (item: Product) => item.documentId === documentId
+      );
+      
+      if (!product) throw new Error("Product not found");
+      
+      setDetailData(product); // Update context
+      return product;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes cache
+    enabled: !!documentId, 
+    initialData: detailData || undefined, // Use context data as initial data
+  });
 
-      fetchData();
-    }
-  }, [documentId, language]);
-
-  if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
-  }
-
-  if (!detailData) {
-    return <p>No data available</p>;
-  }
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error.message}</p>;
+  if (!detailData) return <p>No data available</p>;
 
   return (
     <>
@@ -63,10 +52,10 @@ function EshopDetailsItem() {
           maxWidth: "95%",
           display: "flex",
           justifyContent: "flex-end",
-          margin: " 1rem 0",
+          margin: "1rem 0",
         }}
       >
-        <RightMenu type="openCart"  detailData={detailData} />
+        <RightMenu type="openCart" detailData={detailData} />
       </div>
       <div className="product_details">
         <div className="product_image">
@@ -92,7 +81,9 @@ function EshopDetailsItem() {
             }}
           />
 
-          {openDialog && cart.length > 0 &&  <DialogCart setOpenDialog={setOpenDialog} />}
+          {openDialog && cart.length > 0 && (
+            <DialogCart setOpenDialog={setOpenDialog} />
+          )}
         </div>
       </div>
     </>

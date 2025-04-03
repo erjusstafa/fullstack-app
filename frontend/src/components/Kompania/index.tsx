@@ -1,30 +1,24 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { handleCustomAPI } from "../../api";
 import { cardsInterface, DocumentDataCompany } from "./types";
 import "./style.scss";
 import { CardItem } from "./Cards";
 import { Menu } from "../Menu";
+import { useQuery } from "@tanstack/react-query";
 
 const Kompania = () => {
-  const [data, setData] = useState<DocumentDataCompany | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, error } = useQuery<DocumentDataCompany>({
+    queryKey: ["company-page"],
+    queryFn: () => handleCustomAPI(`company-page?[populate]=*`, "GET"),
+    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+  });
 
-  useEffect(() => {
-    handleCustomAPI("company-page?[populate]=*", "GET")
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error instanceof Error ? error.message : "An error occurred");
-        setLoading(false);
-      });
-  }, []);
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;
 
   return (
     <div className="container_company">
-      {loading && <p>Loading...</p>}
+      {isLoading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {data?.data.menu && <Menu data={data?.data?.menu} type="header_menu" />}
 

@@ -1,93 +1,93 @@
-import React, { useState } from "react";
-import "./style.scss";
-import { loginUserService } from "../../../services/auth";
+import { useMutation } from "@tanstack/react-query";
 import RightButtons from "./RightButtons";
+import React, { useState } from "react";
+import { authService } from "../../../services/auth";
+import "./style.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contextApi/AuthContext";
 
 function Login() {
   const [identifier, setIdentifier] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const { loginUser, isLoggedIn } = useAuth();
 
-  const handleLogin = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await loginUserService(identifier, password);
-
-      if (response?.user) {
-        setUser(response.user);
-        console.log("User logged in successfully:", response.user);
+  const loginMutation = useMutation({
+    mutationFn: ({
+      identifier,
+      password,
+    }: {
+      identifier: string;
+      password: string;
+    }) => authService.login(identifier, password),
+    onSuccess: (data) => {
+      if (data?.user) {
+        loginUser({ username: data.user.username }); // Use context login
+        navigate("/eshop");
       } else {
-        setError("Invalid credentials or user not found");
+        setError("Invalid credentials");
       }
-    } catch (err) {
-      setError("An error occurred while logging in.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    },
+    onError: (error) => {
+      setError(error.message || "Login failed");
+    },
+  });
+
+  if (isLoggedIn) {
+    navigate("/eshop");
+    return null;
+  }
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    loginMutation.mutate({ identifier, password });
   };
 
-
+ 
   return (
-    <React.Fragment>
-      {user ? (
-        <div className="auth_container">
-          <h1>Welcome, {user.username}</h1>
-        </div>
-      ) : (
-        <div className="auth_container">
-          <div className="auth_container_form">
-            <h1>Mirë se vjen në My One</h1>
-            <h5>Hyr për të gjeneruar konfirgurimet e llogarisë</h5>
+    <div className="auth_container">
+      <div className="auth_container_form">
+        <h1>Mirë se vjen në My One</h1>
+        <h5>Hyr për të gjeneruar konfirgurimet e llogarisë</h5>
 
-            {error && <p className="error_message">{error}</p>}
+        {error && <p className="error_message">{error}</p>}
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleLogin();
-              }}
-            >
-              <div className="auth_container_form_username">
-                <label>Emri i përdoruesit*</label>
-                <input
-                  type="text"
-                  placeholder="Email ose Numri i Regjistruar"
-                  value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="auth_container_form_password">
-                <label>Fjalëkalimi*</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <p className="auth_container_forgot_password">
-                Keni harruar fjalekalimin?
-              </p>
-              <button
-                type="submit"
-                className="auth_container_button"
-                disabled={loading}
-              >
-                {loading ? "Duke u identifikuar..." : "Hyr"}
-              </button>
-            </form>
+        <form onSubmit={handleLogin}>
+          <div className="auth_container_form_username">
+            <label>Emri i përdoruesit*</label>
+            <input
+              type="text"
+              placeholder="Email ose Numri i Regjistruar"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              required
+            />
           </div>
+          <div className="auth_container_form_password">
+            <label>Fjalëkalimi*</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <p className="auth_container_forgot_password">
+            Keni harruar fjalekalimin?
+          </p>
+          <button
+            type="submit"
+            className="auth_container_button"
+            disabled={loginMutation.isPending}
+          >
+            {loginMutation.isPending ? "Duke u identifikuar..." : "Hyr"}
+          </button>
+        </form>
+      </div>
 
-          <RightButtons />
-        </div>
-      )}
-    </React.Fragment>
+      <RightButtons />
+    </div>
   );
 }
 

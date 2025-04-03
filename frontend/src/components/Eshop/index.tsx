@@ -1,8 +1,7 @@
-// Eshop.tsx
 import { Fragment, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "./style.scss";
-import { handleCustomAPI } from "../../api";
-import { Product } from "./types";
+import { interfaceEshop, Product } from "./types";
 import Cards from "./Cards";
 import FilterEshop from "./FilterEshop";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -10,16 +9,15 @@ import Skeleton from "react-loading-skeleton";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import { useEshopData } from "../../contextApi/EshopData";
 import RightMenu from "./RightMenu";
+import { handleCustomAPI } from "../../api";
 
 function Eshop() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [filterLoading, setFilterLoading] = useState<boolean>(false);
-
   const { language } = useLanguage();
+  
   const {
-    data,
-    setData,
+    data,  
+    setData,           
     filteredData,
     markaFilters,
     setMarkaFilters,
@@ -29,39 +27,37 @@ function Eshop() {
     setColorFilters,
     detailData,
   } = useEshopData();
-
+  
+  const queryResult = useQuery<interfaceEshop>({
+    queryKey: ['eshops', language],
+    queryFn: () => handleCustomAPI(`eshops?populate=*&locale=${language}`, 'GET'),
+    staleTime: 1000 * 60 * 5, // 5 minutes cache
+    initialData: data || undefined
+  });
+  
   useEffect(() => {
-    handleCustomAPI(`eshops?populate=*&locale=${language}`, "GET")
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error instanceof Error ? error.message : "An error occurred");
-        setLoading(false);
-      });
-  }, [language]);
-
+    if (queryResult.data) {
+      setData(queryResult.data);
+    }
+  }, [queryResult.data, setData]);
+  
+  const { isLoading, error } = queryResult;
+  // Filter loading effect
   useEffect(() => {
-    if (
-      markaFilters.length > 0 ||
-      colorFilters.length > 0 ||
-      ratingFilters.length > 0
-    ) {
+    if (markaFilters.length > 0 || colorFilters.length > 0 || ratingFilters.length > 0) {
       setFilterLoading(true);
       const timer = setTimeout(() => {
         setFilterLoading(false);
       }, 1500);
       return () => clearTimeout(timer);
-    } else {
-      setFilterLoading(false);
     }
   }, [markaFilters, colorFilters, ratingFilters]);
 
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;
+
   return (
     <div style={{ maxWidth: "95%", margin: "auto" }}>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="filter_eshop_container">
         <div style={{ display: "flex", gap: ".6rem" }}>
           <FilterEshop
@@ -81,10 +77,8 @@ function Eshop() {
             type="rating"
           />
         </div>
-
         <RightMenu type="openCart" detailData={detailData} />
       </div>
-
       <div className="eshop_card_container">
         {filteredData.map((item: Product, index: number) => (
           <Fragment key={index}>

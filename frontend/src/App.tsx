@@ -6,11 +6,13 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { queryClient } from "./lib/react-query";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoadingSlider from "./components/Loading";
 import { MainContextProvider } from "./contextApi";
-import RightMenu from "./components/Eshop/RightMenu";
 
 // Lazy load the components
 const Individ = React.lazy(() => import("./components/Individ"));
@@ -76,11 +78,14 @@ function App() {
 // Wrap App with Router and MainContextProvider
 function AppWrapper() {
   return (
-    <MainContextProvider>
-      <Router>
-        <App />
-      </Router>
-    </MainContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <MainContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </MainContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

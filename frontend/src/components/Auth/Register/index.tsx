@@ -2,20 +2,12 @@ import { useState } from "react";
 import "./style.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserService } from "../../../services/auth";
+import { RegisterUserProps } from "../../../services/auth/types";
+import { useMutation } from "@tanstack/react-query";
+import { authService } from "../../../services/auth";
+import { ExtendedRegisterUserProps } from "./types";
 
-interface ExtendedRegisterUserProps {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  lastName?: string;
-  phone: string;
-  title?: string;
-  gender?: string;
-  birthdate?: string;
-}
-
+ 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
   /* const [showConfirmPassword, setShowConfirmPassword] = useState(false); */
@@ -33,7 +25,6 @@ function Register() {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [registrationSuccess, setRegistrationSuccess] =
     useState<boolean>(false);
 
@@ -45,6 +36,20 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const registerMutation = useMutation({
+    mutationFn: (registrationData: RegisterUserProps) =>
+      authService.register(registrationData),
+    onSuccess: (response) => {
+      if (response?.user) {
+        setRegistrationSuccess(true);
+        setTimeout(() => navigate("/selfcare/login"), 1000);
+      }
+    },
+    onError: (error: Error) => {
+      setError(error.message || "Ndodhi një gabim gjatë regjistrimit.");
+    },
+  });
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -52,40 +57,13 @@ function Register() {
       setError("Ju lutem plotësoni të gjitha fushat e detyrueshme");
       return;
     }
-    /* 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Fjalëkalimet nuk përputhen");
-      return;
-    } */
 
-    setLoading(true);
     setError(null);
-
-    try {
-      const registrationData = {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      };
-
-      const response = await registerUserService(registrationData);
-
-      console.log("........", response);
-
-      if (response?.user) {
-        setRegistrationSuccess(true);
-
-        setTimeout(() => {
-          navigate("/selfcare/login");
-        }, 1000);
-      } else {
-        setError(response?.message || "Regjistrimi dështoi");
-      }
-    } catch (err) {
-      setError("Ndodhi një gabim gjatë regjistrimit.");
-    } finally {
-      setLoading(false);
-    }
+    registerMutation.mutate({
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    });
   };
 
   return (
@@ -218,8 +196,12 @@ function Register() {
             Hyr
           </Link>
         </p>
-        <button type="submit" className="register_btn" disabled={loading}>
-          {loading ? "Duke u regjistruar..." : "REGJISTROHU"}
+        <button
+          type="submit"
+          className="register_btn"
+          disabled={registerMutation.isPending}
+        >
+          {registerMutation.isPending ? "Duke u regjistruar..." : "REGJISTROHU"}
         </button>
       </div>
     </form>
