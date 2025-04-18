@@ -12,7 +12,7 @@ import WelcomeMessage from "./WelcomeMessage";
   const { data, isLoading, error } = useQuery<DocumentData>({
     queryKey: ["home-page", language], 
     queryFn: () => 
-      handleCustomAPI(`home-page?[populate]=*&locale=${language}`, "GET"),
+      handleCustomAPI(`home-page/customHomepage?[populate]=*&locale=${language}`, "GET"),
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
   });
 
@@ -21,9 +21,9 @@ import WelcomeMessage from "./WelcomeMessage";
 
   return (
     <div>
-      {data?.data.menu && <Menu data={data.data.menu} type="header_menu" />}
-      {data?.data.sl && <Slider sliders={data.data.sl} />}
-      {data?.data.wlc && <WelcomeMessage wlc={data.data.wlc} />}
+      {data?.data.homePage.menu && <Menu data={data.data.homePage.menu} type="header_menu" />}
+      {data?.data.homePage.sl && <Slider sliders={data.data.homePage.sl} />}
+      {data?.data.homePage.wlc && <WelcomeMessage wlc={data.data.homePage.wlc} />}
     </div>
   );
 };

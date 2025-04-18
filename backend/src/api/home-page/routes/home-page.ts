@@ -1,7 +1,15 @@
-/**
- * home-page router
- */
+// src/api/home-page/routes/home-page.ts
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::home-page.home-page');
+export default {
+    routes: [
+      {
+        method: 'GET',
+        path: '/home-page/customHomepage',
+        handler: 'home-page.customHomepage',
+        config: {
+          auth: false, // You can set this to true if authentication is needed
+        },
+      },
+    ],
+  };
+  

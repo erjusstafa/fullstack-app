@@ -6,7 +6,7 @@ import { ApiResponseHeader, HeaderLink } from "./types";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import { useEshopData } from "../../contextApi/EshopData";
- 
+
 const Header = () => {
   const location = useLocation();
   const { language, setLanguage } = useLanguage();
@@ -14,17 +14,12 @@ const Header = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  
-   
-  const {
-    data: headerData,
-    isLoading,
-    error,
-  } = useQuery<ApiResponseHeader>({
-    queryKey: ["header", language], 
-    queryFn: () => 
+
+  const { data: headerData, error } = useQuery<ApiResponseHeader>({
+    queryKey: ["header", language],
+    queryFn: () =>
       handleCustomAPI(`header?populate=*&locale=${language}`, "GET"),
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
@@ -43,7 +38,6 @@ const Header = () => {
 
   return (
     <div className="container">
-      {isLoading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
 
       <div className="header_top_inner">
@@ -55,8 +49,8 @@ const Header = () => {
 
         <div className="header_top_inner_links">
           {/* Hamburger Menu */}
-          <div 
-            className="hamburger-menu" 
+          <div
+            className="hamburger-menu"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
@@ -65,7 +59,9 @@ const Header = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className={`header_links ${isMenuOpen ? "mobile-menu-open" : ""}`}>
+          <div
+            className={`header_links ${isMenuOpen ? "mobile-menu-open" : ""}`}
+          >
             {headerData?.data.headerLink.map((item: HeaderLink) => (
               <div key={item.id} className="header_links_item">
                 <Link
@@ -85,30 +81,37 @@ const Header = () => {
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text">
-                    <img src="https://www.one.al/public_portal/react/dist/images/search.svg" alt="Search" />
+                    <img
+                      src="https://www.one.al/public_portal/react/dist/images/search.svg"
+                      alt="Search"
+                    />
                   </div>
                 </div>
                 <input
                   type="text"
                   ref={searchInputRef}
                   value={inputsearch}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setinputSearch(e.target.value)}
-                  placeholder={language === "en" 
-                    ? "What are you looking for?" 
-                    : "Çfarë po kërkoni?"}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setinputSearch(e.target.value)
+                  }
+                  placeholder={
+                    language === "en"
+                      ? "What are you looking for?"
+                      : "Çfarë po kërkoni?"
+                  }
                 />
               </div>
             </form>
 
             <div className="headerLang">
-              <a 
-                onClick={() => setLanguage("en")} 
+              <a
+                onClick={() => setLanguage("en")}
                 className={language === "en" ? "active" : ""}
               >
                 En
               </a>
-              <a 
-                onClick={() => setLanguage("sq")} 
+              <a
+                onClick={() => setLanguage("sq")}
                 className={language === "sq" ? "active" : ""}
               >
                 Al
