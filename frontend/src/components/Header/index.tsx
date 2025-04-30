@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { handleCustomAPI } from "../../api";
 import "./style.scss";
 import { ApiResponseHeader, HeaderLink } from "./types";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../../contextApi/LanguageContext";
-import { useEshopData } from "../../contextApi/EshopData";
+import { useEshopData } from "../../contextApi/EshopDataContext";
+import { useGet } from "../../api/methods";
 
 const Header = () => {
   const location = useLocation();
@@ -15,12 +15,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const { data: headerData, error } = useQuery<ApiResponseHeader>({
-    queryKey: ["header", language],
-    queryFn: () =>
-      handleCustomAPI(`header?populate=*&locale=${language}`, "GET"),
-    staleTime: 1000 * 60 * 5,
-  });
+  const fetchHeaderData = (url: string) => handleCustomAPI<ApiResponseHeader>(url, "GET");
+  const { data: headerData, error } = useGet<ApiResponseHeader>(["header", language],`header?populate=*&locale=${language}`, fetchHeaderData);
 
   useEffect(() => {
     if (searchInputRef.current) searchInputRef.current.focus();

@@ -1,10 +1,17 @@
-/* export interface RightMenuTypes {
-    data: {
-        authPage: {
-            id: number;
-            title: string;
-            url: string;
-            children?: Array<RightMenuTypes>;
-        };
-    };
-} */
+ 
+
+    export interface RightMenuTypes {
+        data: {
+             menu: menuInteface[];
+             
+          };
+      }
+      
+      export interface menuInteface {
+        id: number;
+        title: string;
+        url: string;
+        children?: Array<menuInteface>;
+      }
+      
+      

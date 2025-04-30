@@ -16,9 +16,10 @@ export const Menu: React.FC<{ data: menuInteface[]; type: string }> = ({
           : ""
       }
     >
-      {data.map((item, index) => (
-        <MenuItem key={index} item={item} level={1} />
-      ))}
+      {Array.isArray(data) &&
+        data.map((item, index) => (
+          <MenuItem key={index} item={item} level={1} />
+        ))}
     </div>
   );
 };

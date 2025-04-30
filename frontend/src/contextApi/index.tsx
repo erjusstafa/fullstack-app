@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { EshopDataProvider } from "./EshopData";
-import { LanguageProvider } from "./LanguageContext";
+ import { LanguageProvider } from "./LanguageContext";
 import { AuthProvider } from "./AuthContext";
+import { EshopDataProvider } from "./EshopDataContext";
 
 export const MainContextProvider = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { handleCustomAPI } from "../../../../api";
 import { Product } from "../../types";
 import "./style.scss";
 import RightMenu from "../../RightMenu";
+import { useGetDetail } from "../../../../api/methods";
 
 type ApiResponse = {
   data: Product[];
@@ -13,30 +13,25 @@ function EshopPackageDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
 
   const {
-    data: response,
+    data: product,
     isLoading,
     isError,
     error,
-  } = useQuery<ApiResponse, Error, Product>({
-    queryKey: ["eshop-package-details", documentId],
-    queryFn: async () => {
-      if (!documentId) throw new Error("No document ID provided");
-      return handleCustomAPI(
-        `eshop-packages?filters[documentId][$eq]=${documentId}&populate=*`,
-        "GET"
-      ) as Promise<ApiResponse>;
-    },
-    enabled: !!documentId, // Only run query if documentId exists
-    select: (data) => {
+  } = useGetDetail<ApiResponse, Product>(
+    ["eshop-package-details", documentId],
+    `eshop-packages?filters[documentId][$eq]=${documentId}&populate=*`,
+    documentId,
+    (url) => handleCustomAPI(url, "GET"),
+    (data) => {
       const product = data.data.find((item) => item.documentId === documentId);
       if (!product) throw new Error("Product not found");
       return product;
-    },
-  });
+    }
+  );
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p style={{ color: "red" }}>{error?.message}</p>;
-  if (!response) return <p>No data available</p>;
+  if (!product) return <p>No data available</p>;
 
   return (
     <>
@@ -46,16 +41,16 @@ function EshopPackageDetailsItem() {
       </div>
       <div className="package-card">
         <div>
-          <h2 className="title">{response.eshop.name}</h2>
+          <h2 className="title">{product.eshop.name}</h2>
           <table className="details">
             <tbody>
               <tr>
                 <td className="label_des">Description</td>
-                <td className="value">{response.eshop.description}</td>
+                <td className="value">{product.eshop.description}</td>
               </tr>
               <tr>
                 <td className="label">Price</td>
-                <td className="price">{response.eshop.price} LEKË</td>
+                <td className="price">{product.eshop.price} LEKË</td>
               </tr>
             </tbody>
           </table>

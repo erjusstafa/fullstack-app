@@ -15,7 +15,7 @@ function FilterEshop({
 
   useEffect(() => {
     if (data) {
-      const values = Array.from(new Set(data.map((item) =>  item?.eshop[type])));
+      const values = Array.from(new Set(data.map((item) => item?.eshop[type]))).filter((value): value is string => value !== undefined);
       setFilterList(values);
     }
   }, [data, type]);

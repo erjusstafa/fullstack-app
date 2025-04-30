@@ -4,15 +4,12 @@ import Slider from "../Individ/Slider";
 import { DocumentDataBusiness } from "./types";
 import { SecondContainer } from "./SecondContainer";
 import { Menu } from "../Menu";
-import { useQuery } from "@tanstack/react-query";
+import { useGet } from "../../api/methods";
 
 const Biznes = () => {
-  const { data, isLoading, error } = useQuery<DocumentDataBusiness>({
-    queryKey: ["business-page"], 
-    queryFn: () =>
-      handleCustomAPI(`business-page?[populate]=*`, "GET"),
-    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
-  });
+  
+  const fetchBiznesData = (url: string) => handleCustomAPI<DocumentDataBusiness>(url, "GET");
+  const { data, isLoading, error } = useGet<DocumentDataBusiness>(["business-page"],`business-page?[populate]=*`, fetchBiznesData);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;

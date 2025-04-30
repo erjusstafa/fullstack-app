@@ -7,10 +7,15 @@ export interface RegisterUserProps {
   title?: string;
   gender?: string;
   birthdate?: string;
-  }
-  
-  export  interface LoginUserProps {
-    identifier: string;
-    password: string;
-  }
-   
+}
+
+export interface LoginUserProps {
+  identifier: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  user: {
+    username: string;
+  };
+}

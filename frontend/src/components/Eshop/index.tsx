@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import "./style.scss";
 import { interfaceEshop, Product } from "./types";
 import Cards from "./Cards";
@@ -7,17 +6,18 @@ import FilterEshop from "./FilterEshop";
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton from "react-loading-skeleton";
 import { useLanguage } from "../../contextApi/LanguageContext";
-import { useEshopData } from "../../contextApi/EshopData";
 import RightMenu from "./RightMenu";
 import { handleCustomAPI } from "../../api";
+import { useGet } from "../../api/methods";
+import { useEshopData } from "../../contextApi/EshopDataContext";
 
 function Eshop() {
   const [filterLoading, setFilterLoading] = useState<boolean>(false);
   const { language } = useLanguage();
-  
+
   const {
-    data,  
-    setData,           
+    data,
+    setData,
     filteredData,
     markaFilters,
     setMarkaFilters,
@@ -27,20 +27,18 @@ function Eshop() {
     setColorFilters,
     detailData,
   } = useEshopData();
-  
-  const queryResult = useQuery<interfaceEshop>({
-    queryKey: ['eshops', language],
-    queryFn: () => handleCustomAPI(`eshops?populate=*&locale=${language}`, 'GET'),
-    staleTime: 1000 * 60 * 5, // 5 minutes cache
-    initialData: data || undefined
-  });
-  
+
+
+  const fetchEshopData = (url: string) => handleCustomAPI<interfaceEshop>(url, "GET");
+  const queryResult = useGet<interfaceEshop>(['eshops', language], `eshops?populate=*&locale=${language}`, fetchEshopData, data || undefined);
+
+
   useEffect(() => {
     if (queryResult.data) {
       setData(queryResult.data);
     }
   }, [queryResult.data, setData]);
-  
+
   const { isLoading, error } = queryResult;
   // Filter loading effect
   useEffect(() => {

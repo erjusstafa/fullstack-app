@@ -1,5 +1,3 @@
-// contextApi/EshopData/EshopDataProvider.tsx
-
 import { createContext, useState, useContext, ReactNode } from "react";
 import { interfaceEshop, Product } from "../../components/Eshop/types";
 import { EshopContextType } from "./types";
@@ -10,8 +8,10 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<interfaceEshop | null>(null);
   const [detailData, setDetailData] = useState<Product | null>(null);
   const [inputsearch, setinputSearch] = useState<string>("");
-  const [cart, setCart] = useState< Product[]>([]);
-
+  const [cart, setCart] = useState<Product[]>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   // Add state for the filters
   const [markaFilters, setMarkaFilters] = useState<string[]>([]);
   const [ratingFilters, setRatingFilters] = useState<string[]>([]);
@@ -40,13 +40,19 @@ export const EshopDataProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const addProductToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    console.log('----product----', product);
-    
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart, product];
+       localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   const removeProductToCart = (id: number) => {
-    setCart((prevCart) =>  prevCart.filter((item) => item.id !== id));
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+       localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
     
   };
 

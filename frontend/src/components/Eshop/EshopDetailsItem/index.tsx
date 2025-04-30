@@ -1,14 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { Product } from "../types";
 import { handleCustomAPI } from "../../../api";
 import buyButton from "../../../assets/buynow.png";
 import "./style.scss";
 import { useLanguage } from "../../../contextApi/LanguageContext";
-import { useEshopData } from "../../../contextApi/EshopData";
 import DialogCart from "./DialogCart";
 import RightMenu from "../RightMenu";
 import { useState } from "react";
+import { useGetDetail } from "../../../api/methods";
+import { useEshopData } from "../../../contextApi/EshopDataContext";
+
+type ApiResponse = {
+  data: Product[];
+};
+
 
 function EshopDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
@@ -16,33 +21,25 @@ function EshopDetailsItem() {
   const { language } = useLanguage();
   const { addProductToCart, detailData, setDetailData, cart } = useEshopData();
 
-  // React Query for data fetching
-  const { isLoading, error } = useQuery<Product>({
-    queryKey: ['eshop-item', documentId, language],
-    queryFn: async () => {
-      if (!documentId) throw new Error("No document ID provided");
-      
-      const response = await handleCustomAPI(
-        `eshops?filters[documentId][$eq]=${documentId}&populate=*&locale=${language}`,
-        "GET"
-      ) as { data: Product[] };
-      
-      const product = response.data?.find(
-        (item: Product) => item.documentId === documentId
-      );
-      
-      if (!product) throw new Error("Product not found");
-      
-      setDetailData(product); // Update context
-      return product;
-    },
-    staleTime: 1000 * 60 * 5, // 5 minutes cache
-    enabled: !!documentId, 
-    initialData: detailData || undefined, // Use context data as initial data
-  });
-
+    const {
+      isLoading,
+      isError,
+      error,
+    } = useGetDetail< ApiResponse, Product>(
+      ['eshop-item', documentId, language],
+      `eshops?filters[documentId][$eq]=${documentId}&populate=*&locale=${language}`,
+      documentId,
+      (url) => handleCustomAPI(url, "GET"),
+      (data) => {
+        const product = data.data.find((item) => item.documentId === documentId);
+        if (!product) throw new Error("Product not found");
+        setDetailData(product); 
+        return product;
+      },true
+    );
+  
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: "red" }}>{error.message}</p>;
+  if (isError) return <p style={{ color: "red" }}>{error?.message}</p>;
   if (!detailData) return <p>No data available</p>;
 
   return (

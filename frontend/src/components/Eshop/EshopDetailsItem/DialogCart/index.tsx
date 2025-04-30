@@ -1,6 +1,6 @@
 import { DialogBoxInterface } from "./types";
 import "./style.scss";
-import { useEshopData } from "../../../../contextApi/EshopData";
+import { useEshopData } from "../../../../contextApi/EshopDataContext";
 import React from "react";
 
 function DialogCart({ setOpenDialog }: DialogBoxInterface) {

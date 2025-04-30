@@ -2,15 +2,13 @@ import { useState } from "react";
 import "./style.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterUserProps } from "../../../services/auth/types";
-import { useMutation } from "@tanstack/react-query";
+import { AuthResponse, RegisterUserProps } from "../../../services/auth/types";
 import { authService } from "../../../services/auth";
 import { ExtendedRegisterUserProps } from "./types";
+import { usePost } from "../../../api/methods";
 
- 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  /* const [showConfirmPassword, setShowConfirmPassword] = useState(false); */
 
   const [formData, setFormData] = useState<ExtendedRegisterUserProps>({
     username: "",
@@ -36,19 +34,18 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const registerMutation = useMutation({
-    mutationFn: (registrationData: RegisterUserProps) =>
-      authService.register(registrationData),
-    onSuccess: (response) => {
-      if (response?.user) {
+  const registerMutation = usePost<RegisterUserProps, AuthResponse>(
+    authService.register,
+    (response) => {
+      if (response) {
         setRegistrationSuccess(true);
         setTimeout(() => navigate("/selfcare/login"), 1000);
       }
     },
-    onError: (error: Error) => {
+    (error) => {
       setError(error.message || "Ndodhi një gabim gjatë regjistrimit.");
-    },
-  });
+    }
+  );
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -5,23 +5,30 @@ import { handleCustomAPI } from "../../../api";
 import Cards from "../Cards";
 import { interfaceEshop, Product } from "../types";
 import RightMenu from "../RightMenu";
+import { useGet } from "../../../api/methods";
 
 function EshopPackage() {
-  const {
-    data,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<{ data: interfaceEshop }, Error>({
-    queryKey: ["eshop-packages"],
-    queryFn: () => handleCustomAPI(`eshop-packages?populate=*`, "GET"),
-  });
+  /*   const {
+      data,
+      isLoading,
+      isError,
+      error,
+    } = useQuery<{ data: interfaceEshop }, Error>({
+      queryKey: ["eshop-packages"],
+      queryFn: () => handleCustomAPI(`eshop-packages?populate=*`, "GET"),
+    }); */
+
+
+  const fetchEshopPackageData = (url: string) => handleCustomAPI<interfaceEshop>(url, "GET");
+  const { data, isLoading, isError, error } = useGet<interfaceEshop>(["eshop-packages"], `eshop-packages?populate=*`, fetchEshopPackageData);
+
+
 
   return (
     <div style={{ maxWidth: "95%", margin: "auto" }}>
       {isLoading && <p>Loading...</p>}
       {isError && <p style={{ color: "red" }}>{error?.message}</p>}
-      
+
       <div className="filter_eshop_container">
         <div style={{ display: "flex", gap: ".6rem" }}></div>
         <RightMenu type="openCart" />
