@@ -9,7 +9,7 @@ import { useGet } from "../../api/methods";
 const Biznes = () => {
   
   const fetchBiznesData = (url: string) => handleCustomAPI<DocumentDataBusiness>(url, "GET");
-  const { data, isLoading, error } = useGet<DocumentDataBusiness>(["business-page"],`business-page?[populate]=*`, fetchBiznesData);
+  const { data, isLoading, error } = useGet<DocumentDataBusiness>(["business-page"],`business-page?[populate]=*`, fetchBiznesData, undefined, true);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;

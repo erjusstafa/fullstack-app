@@ -16,7 +16,7 @@ const Header = () => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const fetchHeaderData = (url: string) => handleCustomAPI<ApiResponseHeader>(url, "GET");
-  const { data: headerData, error } = useGet<ApiResponseHeader>(["header", language],`header?populate=*&locale=${language}`, fetchHeaderData);
+  const { data: headerData, error } = useGet<ApiResponseHeader>(["header", language], `header?populate=*&locale=${language}`, fetchHeaderData, undefined, true);
 
   useEffect(() => {
     if (searchInputRef.current) searchInputRef.current.focus();

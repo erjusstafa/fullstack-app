@@ -427,6 +427,35 @@ export interface ApiBusinessPageBusinessPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiChatbotChatbot extends Struct.CollectionTypeSchema {
+  collectionName: 'chatbots';
+  info: {
+    displayName: 'Chatbot';
+    pluralName: 'chatbots';
+    singularName: 'chatbot';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    botReply: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::chatbot.chatbot'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userMessage: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
   collectionName: 'company_pages';
   info: {
@@ -1316,6 +1345,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::auth.auth': ApiAuthAuth;
       'api::business-page.business-page': ApiBusinessPageBusinessPage;
+      'api::chatbot.chatbot': ApiChatbotChatbot;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
       'api::eshop-package.eshop-package': ApiEshopPackageEshopPackage;
       'api::eshop.eshop': ApiEshopEshop;

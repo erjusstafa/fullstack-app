@@ -4,8 +4,8 @@ export default {
     routes: [
       {
         method: 'GET',
-        path: '/home-page/customHomepage',
-        handler: 'home-page.customHomepage',
+        path: '/home-page/customHomePage',
+        handler: 'home-page.customHomePage',
         config: {
           auth: false, // You can set this to true if authentication is needed
         },

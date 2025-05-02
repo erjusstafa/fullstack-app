@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { handleCustomAPI } from "../../api";
 import "./style.scss";
 import { ApiResponseFooter, FooterLink } from "./types";
@@ -6,19 +5,10 @@ import FooterCard from "./FooterCard";
 import { useGet } from "../../api/methods";
 
 const Footer = () => {
-/*   const {
-    data,
-    isLoading,
-    error,
-  } = useQuery<ApiResponseFooter>({
-    queryKey: ["footer"],
-    queryFn: () => handleCustomAPI("footer?populate=*", "GET"),
-    staleTime: 1000 * 60 * 5, 
-  }); */
 
-    const fetchFooterData = (url: string) => handleCustomAPI<ApiResponseFooter>(url, "GET");
-    const { data: footerData,isLoading, error } = useGet<ApiResponseFooter>(["footer"],`footer?populate=*`, fetchFooterData);
-  
+  const fetchFooterData = (url: string) => handleCustomAPI<ApiResponseFooter>(url, "GET");
+  const { data: footerData, isLoading, error } = useGet<ApiResponseFooter>(["footer"], `footer?populate=*`, fetchFooterData, undefined, true);
+
 
   const groupByMainTitle = (
     links: FooterLink[]

@@ -4,7 +4,6 @@ import { useEshopData } from "../../../contextApi/EshopDataContext";
 import "./style.scss";
 import { useState } from "react";
 import DialogCart from "../EshopDetailsItem/DialogCart";
-import { Product } from "../types";
 import { handleCustomAPI } from "../../../api";
 import { Menu } from "../../Menu";
 import { useAuth } from "../../../contextApi/AuthContext";
@@ -14,10 +13,8 @@ import { RightMenuTypes } from "./types";
 
 function RightMenu({
   type,
-  detailData,
 }: {
-  type?: "openCart";
-  detailData?: Product | null;
+  type?: "openCart"
 }) {
   const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
   const [cartOpen, setCartOpen] = useState<boolean>(false);
@@ -52,7 +49,9 @@ function RightMenu({
   const { data: authMenuData, error } = useGet<RightMenuTypes>(
     ["auth-menu"],
     `auth?populate=*`,
-    fetchLinkAuthData
+    fetchLinkAuthData,
+    undefined,
+    userMenuOpen && !isLoggedIn
   );
 
   const handleUserIconClick = () => {
@@ -63,12 +62,8 @@ function RightMenu({
   const handleCartClick = () => {
     setCartOpen(true);
     setUserMenuOpen(false);
-    console.log("cartOpen", cartOpen );
-    console.log(" cart.length",  cart );
-    console.log("type",   type    );
-    console.log("detailData", detailData);
-
   };
+
 
   const handleLogout = async () => {
     try {
@@ -119,7 +114,7 @@ function RightMenu({
               </button>
             </div>
           ) : (
-            authMenuData?.data.menu && (
+            authMenuData?.data.menu &&  (
               <Menu data={authMenuData.data.menu} type="auth_menu" />
             )
           ))}

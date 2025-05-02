@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-// GET Request Hook
 export function useGet<T>(
   queryKey: string[],
   url: string,

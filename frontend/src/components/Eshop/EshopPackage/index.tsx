@@ -20,7 +20,7 @@ function EshopPackage() {
 
 
   const fetchEshopPackageData = (url: string) => handleCustomAPI<interfaceEshop>(url, "GET");
-  const { data, isLoading, isError, error } = useGet<interfaceEshop>(["eshop-packages"], `eshop-packages?populate=*`, fetchEshopPackageData);
+  const { data, isLoading, isError, error } = useGet<interfaceEshop>(["eshop-packages"], `eshop-packages?populate=*`, fetchEshopPackageData, undefined, true);
 
 
 

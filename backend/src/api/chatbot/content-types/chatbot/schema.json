@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chatbots",
+  "info": {
+    "singularName": "chatbot",
+    "pluralName": "chatbots",
+    "displayName": "Chatbot"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "userMessage": {
+      "type": "text",
+      "required": true
+    },
+    "botReply": {
+      "type": "text"
+    }
+  }
+}
