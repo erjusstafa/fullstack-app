@@ -2,13 +2,15 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { handleCustomAPI } from "../../api";
 import "./style.scss";
 import { ApiResponseHeader, HeaderLink } from "./types";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import { useEshopData } from "../../contextApi/EshopDataContext";
 import { useGet } from "../../api/methods";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { language, setLanguage } = useLanguage();
   const { inputsearch, setinputSearch } = useEshopData();
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -90,6 +92,12 @@ const Header = () => {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setinputSearch(e.target.value)
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && inputsearch.trim()) {
+                      e.preventDefault(); 
+                      navigate(`${encodeURIComponent(inputsearch.trim())}`);
+                    }
+                  }}
                   placeholder={
                     language === "en"
                       ? "What are you looking for?"

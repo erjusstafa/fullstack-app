@@ -24,8 +24,7 @@ function Eshop() {
     ratingFilters,
     setRatingFilters,
     colorFilters,
-    setColorFilters,
-    detailData,
+    setColorFilters
   } = useEshopData();
 
 
@@ -75,7 +74,7 @@ function Eshop() {
             type="rating"
           />
         </div>
-        <RightMenu type="openCart" detailData={detailData} />
+        <RightMenu type="openCart"/>
       </div>
       <div className="eshop_card_container">
         {filteredData.map((item: Product, index: number) => (
