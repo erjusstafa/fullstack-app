@@ -12,7 +12,9 @@ type ApiResponse = {
 
 function EshopPackageDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
-
+  if (!documentId) {
+    throw new Error("Invalid documentId: documentId must be a string or number.");
+  }
   const {
     data: product,
     isLoading,

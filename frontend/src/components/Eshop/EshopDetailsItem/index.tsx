@@ -15,6 +15,9 @@ import { ApiResponse } from "./types";
  
 function EshopDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
+  if (!documentId) {
+    throw new Error("Invalid documentId: documentId must be a string or number.");
+  }
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const { language } = useLanguage();
   const { addProductToCart, detailData, setDetailData, cart } = useEshopData();
@@ -33,7 +36,7 @@ function EshopDetailsItem() {
         if (!product) throw new Error("Product not found");
         setDetailData(product); 
         return product;
-      },true
+      }
     );
   
   if (isLoading) return <p>Loading...</p>;
@@ -50,7 +53,7 @@ function EshopDetailsItem() {
           margin: "1rem 0",
         }}
       >
-        <RightMenu type="openCart" detailData={detailData} />
+        <RightMenu type="openCart"   />
       </div>
       <div className="product_details">
         <div className="product_image">
