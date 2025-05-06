@@ -7,14 +7,12 @@ import { useLanguage } from "../../../contextApi/LanguageContext";
 import DialogCart from "./DialogCart";
 import RightMenu from "../RightMenu";
 import { useState } from "react";
-import { useGetDetail } from "../../../api/methods";
+import { useGetDetail } from "../../../api/queryHooks";
 import { useEshopData } from "../../../contextApi/EshopDataContext";
+import { Img } from "../../../shared/UI/Img";
+import { ApiResponse } from "./types";
 
-type ApiResponse = {
-  data: Product[];
-};
-
-
+ 
 function EshopDetailsItem() {
   const { documentId } = useParams<{ documentId: string }>();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -56,7 +54,7 @@ function EshopDetailsItem() {
       </div>
       <div className="product_details">
         <div className="product_image">
-          <img src={detailData.eshop.media} alt={detailData.eshop.name} />
+          <Img src={detailData.eshop.media} alt={detailData.eshop.name} />
         </div>
         <div className="product_info">
           <h1>{detailData.eshop.name}</h1>
@@ -69,7 +67,7 @@ function EshopDetailsItem() {
           <p className="brand">Brand: {detailData.eshop.marka}</p>
           <p className="color">Color: {detailData.eshop.color}</p>
 
-          <img
+          <Img
             src={buyButton}
             alt=""
             onClick={() => {

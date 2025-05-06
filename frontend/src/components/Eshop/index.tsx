@@ -8,7 +8,7 @@ import Skeleton from "react-loading-skeleton";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import RightMenu from "./RightMenu";
 import { handleCustomAPI } from "../../api";
-import { useGet } from "../../api/methods";
+import { useGet } from "../../api/queryHooks";
 import { useEshopData } from "../../contextApi/EshopDataContext";
 
 function Eshop() {

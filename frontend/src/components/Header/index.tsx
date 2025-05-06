@@ -5,7 +5,9 @@ import { ApiResponseHeader, HeaderLink } from "./types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../contextApi/LanguageContext";
 import { useEshopData } from "../../contextApi/EshopDataContext";
-import { useGet } from "../../api/methods";
+import { useGet } from "../../api/queryHooks";
+import { Img } from "../../shared/UI/Img";
+import { Input } from "../../shared/UI/Input";
 
 const Header = () => {
   const location = useLocation();
@@ -39,7 +41,7 @@ const Header = () => {
       {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
 
       <div className="header_top_inner">
-        <img
+        <Img
           className="logo_header"
           src="https://www.one.al/public_portal/react/dist/images/newlogo-tal.svg"
           alt="Logo"
@@ -79,15 +81,15 @@ const Header = () => {
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text">
-                    <img
+                    <Img
                       src="https://www.one.al/public_portal/react/dist/images/search.svg"
                       alt="Search"
                     />
                   </div>
                 </div>
-                <input
+                <Input
                   type="text"
-                  ref={searchInputRef}
+                  ref={searchInputRef as React.RefObject<HTMLInputElement>}
                   value={inputsearch}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setinputSearch(e.target.value)

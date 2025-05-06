@@ -1,4 +1,4 @@
-import { menuInteface } from "../Individ/types";
+import { menuInteface } from "../../pages/Inidivid/types";
 
 export interface DocumentDataCompany {
   data: {

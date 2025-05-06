@@ -1,4 +1,4 @@
-import { welcomeSmsInterface } from "../types";
+import { welcomeSmsInterface } from "../../pages/Inidivid/types";
 import "./style.scss"
 
 const WelcomeMessage = ({ wlc }: { wlc: welcomeSmsInterface }) => {

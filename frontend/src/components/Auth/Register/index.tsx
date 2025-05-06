@@ -5,7 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthResponse, RegisterUserProps } from "../../../services/auth/types";
 import { authService } from "../../../services/auth";
 import { ExtendedRegisterUserProps } from "./types";
-import { usePost } from "../../../api/methods";
+import { usePost } from "../../../api/queryHooks";
+import { Input } from "../../../shared/UI/Input";
+import { Button } from "../../../shared/UI/Button";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -85,24 +87,24 @@ function Register() {
 
         <div className="form_group">
           <label>Emri*</label>
-          <input
+          <Input
             name="username"
             type="text"
             placeholder="Emri i përdoruesit"
             onChange={handleChange}
-            value={formData.username}
+            value={formData.username || ""}
             required
           />
         </div>
 
         <div className="form_group">
           <label>Mbiemri</label>
-          <input
+          <Input
             name="lastName"
             type="text"
             placeholder="Shkruani mbiemrin"
             onChange={handleChange}
-            value={formData.lastName}
+            value={formData.lastName || ""}
           />
         </div>
 
@@ -193,13 +195,13 @@ function Register() {
             Hyr
           </Link>
         </p>
-        <button
+        <Button
           type="submit"
           className="register_btn"
           disabled={registerMutation.isPending}
         >
           {registerMutation.isPending ? "Duke u regjistruar..." : "REGJISTROHU"}
-        </button>
+        </Button>
       </div>
     </form>
   );

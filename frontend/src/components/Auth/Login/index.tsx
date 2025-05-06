@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contextApi/AuthContext";
 import { authService } from "../../../services/auth";
 import { AuthResponse, LoginUserProps } from "../../../services/auth/types";
-import { usePost } from "../../../api/methods";
+import { usePost } from "../../../api/queryHooks";
+import { Input } from "../../../shared/UI/Input";
+import { Button } from "../../../shared/UI/Button";
 
 function Login() {
   const [identifier, setIdentifier] = useState<string>("");
@@ -18,8 +20,7 @@ function Login() {
     ({ identifier, password }) => authService.login(identifier, password),
     (response) => {
       if (response) {
-        // Store user info in your context or global state
-        loginUser({ username: response.user.username }); // Add more fields if needed
+        loginUser({ username: response.user.username }); 
         navigate("/eshop");
       }
     },
@@ -44,7 +45,7 @@ function Login() {
         <form onSubmit={handleLogin}>
           <div className="auth_container_form_username">
             <label>Emri i përdoruesit*</label>
-            <input
+            <Input
               type="text"
               placeholder="Email ose Numri i Regjistruar"
               value={identifier}
@@ -64,13 +65,14 @@ function Login() {
           <p className="auth_container_forgot_password">
             Keni harruar fjalekalimin?
           </p>
-          <button
+          <Button
             type="submit"
             className="auth_container_button"
             disabled={loginMutation.isPending}
           >
             {loginMutation.isPending ? "Duke u identifikuar..." : "Hyr"}
-          </button>
+          </Button>
+
         </form>
       </div>
 

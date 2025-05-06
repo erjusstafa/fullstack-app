@@ -1,3 +1,4 @@
+import { Input } from "../../../shared/UI/Input";
 import "./style.scss";
 
 function DialogBox({
@@ -15,7 +16,7 @@ function DialogBox({
         {filterList.map((marka) => (
           <li key={marka} style={{ margin: "1rem", textAlign: "left" }}>
             <label>
-              <input
+              <Input
                 type="checkbox"
                 checked={selectedFilters.includes(marka)}
                 onChange={() => handleFilterSelect(marka)}

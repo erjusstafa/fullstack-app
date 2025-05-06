@@ -1,4 +1,4 @@
-import { menuInteface } from "../Individ/types";
+import { menuInteface } from "../../pages/Inidivid/types";
 import { MenuItem } from "./MenuItem";
 import "./styles.scss";
 

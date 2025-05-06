@@ -2,14 +2,16 @@ import { Fragment } from "react";
 import { handleCustomAPI } from "../../api";
 import { cardsInterface, DocumentDataCompany } from "./types";
 import "./style.scss";
-import { CardItem } from "./Cards";
-import { Menu } from "../Menu";
-import { useGet } from "../../api/methods";
+
+import { useGet } from "../../api/queryHooks";
+import { CardItem } from "../../shared/Cards";
+import { Menu } from "../../components/Menu";
+import { Img } from "../../shared/UI/Img";
 
 const Kompania = () => {
 
   const fetchKompaniData = (url: string) => handleCustomAPI<DocumentDataCompany>(url, "GET");
-  const { data, isLoading, error } = useGet<DocumentDataCompany>(["company-page"],"company-page?[populate]=*", fetchKompaniData, undefined,true);
+  const { data, isLoading, error } = useGet<DocumentDataCompany>(["company-page"], "company-page?[populate]=*", fetchKompaniData, undefined, true);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;
@@ -20,7 +22,7 @@ const Kompania = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {data?.data.menu && <Menu data={data?.data?.menu} type="header_menu" />}
 
-      <img src={data?.data.img.url} />
+      <Img src={data?.data.img.url} alt="" />
 
       {/* display data */}
 

@@ -11,13 +11,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "./lib/react-query";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import LoadingSlider from "./components/Loading";
+import LoadingSlider from "./shared/Loading";
 import { MainContextProvider } from "./contextApi";
 
 // Lazy load the components
-const Individ = React.lazy(() => import("./components/Individ"));
-const Biznes = React.lazy(() => import("./components/Biznes"));
-const Kompania = React.lazy(() => import("./components/Kompania"));
+const Individ = React.lazy(() => import("./pages/Inidivid"));
+const Biznes = React.lazy(() => import("./pages/Biznes"));
+const Kompania = React.lazy(() => import("./pages/Kompania"));
 const Eshop = React.lazy(() => import("./components/Eshop"));
 const Login = React.lazy(() => import("./components/Auth/Login"));
 const Register = React.lazy(() => import("./components/Auth/Register"));

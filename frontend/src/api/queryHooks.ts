@@ -1,11 +1,14 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
+
+type APIHandler<T> = (url: string) => Promise<T>;
+
 export function useGet<T>(
   queryKey: string[],
   url: string,
-  handleCustomAPI: (url: string) => Promise<T>,
+  handleCustomAPI: APIHandler<T>,
   initialData?: T | undefined,
-  enabled?: boolean
+  enabled?: boolean,
 ) {
   return useQuery<T>({
     queryKey: queryKey,
@@ -35,7 +38,6 @@ export function useGetDetail<TResponse, TSelected>(
   });
 }
 
-// POST Request Hook
 export function usePost<TPayload, TResponse>(
   mutationFn: (data: TPayload) => Promise<TResponse>,
   onSuccess?: (data: TResponse) => void,
@@ -47,7 +49,7 @@ export function usePost<TPayload, TResponse>(
     onError,
   });
 }
-// PUT Request Hook
+
 /* export const usePut=(url) =>{
     return useMutation(async (data) => {
       const res = await fetch(url, {
@@ -59,7 +61,6 @@ export function usePost<TPayload, TResponse>(
     });
   } */
 
-// DELETE Request Hook
 /* export const useDelete =(url)=> {
     return useMutation(async (id) => {
       const res = await fetch(`${url}/${id}`, {

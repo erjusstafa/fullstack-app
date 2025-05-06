@@ -2,7 +2,7 @@ import { handleCustomAPI } from "../../api";
 import "./style.scss";
 import { ApiResponseFooter, FooterLink } from "./types";
 import FooterCard from "./FooterCard";
-import { useGet } from "../../api/methods";
+import { useGet } from "../../api/queryHooks";
 
 const Footer = () => {
 

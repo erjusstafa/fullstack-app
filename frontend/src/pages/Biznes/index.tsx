@@ -1,10 +1,10 @@
 import { handleCustomAPI } from "../../api";
-import WelcomeMessage from "../Individ/WelcomeMessage";
-import Slider from "../Individ/Slider";
 import { DocumentDataBusiness } from "./types";
-import { SecondContainer } from "./SecondContainer";
-import { Menu } from "../Menu";
-import { useGet } from "../../api/methods";
+import { useGet } from "../../api/queryHooks";
+import { Menu } from "../../components/Menu";
+import Slider from "../../shared/Slider";
+import WelcomeMessage from "../../shared/WelcomeMessage";
+import { SecondContainer } from "../../shared/SecondContainer";
 
 const Biznes = () => {
   

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./style.scss";
+import { Button } from "../../../../shared/UI/Button";
 function RightButtons() {
   return (
     <div className="auth_container_guest">
@@ -16,7 +17,7 @@ function RightButtons() {
           <hr />
         </div>
 
-        <button className="auth_buttons_guest">VAZHDO SI VIZITOR</button>
+        <Button className="auth_buttons_guest">VAZHDO SI VIZITOR</Button>
       </div>
     </div>
   );

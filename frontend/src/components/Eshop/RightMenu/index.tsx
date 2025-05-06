@@ -7,9 +7,10 @@ import DialogCart from "../EshopDetailsItem/DialogCart";
 import { handleCustomAPI } from "../../../api";
 import { Menu } from "../../Menu";
 import { useAuth } from "../../../contextApi/AuthContext";
-import LoadingSlider from "../../Loading";
-import { useGet } from "../../../api/methods";
+import LoadingSlider from "../../../shared/Loading";
+import { useGet } from "../../../api/queryHooks";
 import { RightMenuTypes } from "./types";
+import { Button } from "../../../shared/UI/Button";
 
 function RightMenu({
   type,
@@ -105,13 +106,13 @@ function RightMenu({
               <div className="user_info">
                 <span className="username">Welcome, {username}!</span>
               </div>
-              <button
+              <Button
                 className="logout_button"
                 onClick={handleLogout}
                 disabled={authLoading}
               >
                 {authLoading ? "Logging out..." : "Logout"}
-              </button>
+              </Button>
             </div>
           ) : (
             authMenuData?.data.menu &&  (

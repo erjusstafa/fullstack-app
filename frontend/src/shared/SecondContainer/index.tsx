@@ -1,4 +1,5 @@
-import { secondContainerType } from "../types";
+import { secondContainerType } from "../../pages/Biznes/types";
+import { Img } from "../UI/Img";
 import "./style.scss";
 
 export const SecondContainer = ({ imgs }: { imgs: secondContainerType[] }) => {
@@ -7,7 +8,7 @@ export const SecondContainer = ({ imgs }: { imgs: secondContainerType[] }) => {
       {imgs.map((item, index) => {
         return (
           <div key={index}>
-            <img src={item.url} alt="test" />
+            <Img src={item.url} alt="test" />
           </div>
         );
       })}

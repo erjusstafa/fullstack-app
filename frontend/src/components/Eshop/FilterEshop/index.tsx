@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FilterEshopProps } from "./types";
 import "./style.scss";
 import DialogBox from "../DialogBox";
+import { Button } from "../../../shared/UI/Button";
 
 function FilterEshop({
   onFilterChange,
@@ -33,7 +34,7 @@ function FilterEshop({
     <div style={{ margin: "1rem" }}>
       {filtroTitle}
       {"  > "}
-      <button
+      <Button
         className="filter_eshop"
         onClick={() => setIsDialogOpen(!isDialogOpen)}
       >
@@ -45,7 +46,7 @@ function FilterEshop({
             handleFilterSelect={handleFilterSelect}
           />
         )}
-      </button>
+      </Button>
     </div>
   );
 }

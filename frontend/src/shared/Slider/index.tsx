@@ -1,5 +1,6 @@
 import { Carousel } from "antd";
-import { sliderInterface } from "../types";
+import { sliderInterface } from "../../pages/Inidivid/types";
+import { Img } from "../UI/Img";
 
 
 const Slider = ({sliders}:{sliders:sliderInterface[]}) => {
@@ -7,7 +8,7 @@ const Slider = ({sliders}:{sliders:sliderInterface[]}) => {
  <Carousel autoplay={{ dotDuration: true }} autoplaySpeed={2000}>
     {sliders?.map((slider, index) => (
         <div key={index}>
-          <img src={slider.url} alt="slider"  />
+          <Img src={slider.url} alt="slider"  />
         </div>
       ))}
     </Carousel>

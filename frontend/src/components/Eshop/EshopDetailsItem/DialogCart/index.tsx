@@ -2,6 +2,7 @@ import { DialogBoxInterface } from "./types";
 import "./style.scss";
 import { useEshopData } from "../../../../contextApi/EshopDataContext";
 import React from "react";
+import { Button } from "../../../../shared/UI/Button";
 
 function DialogCart({ setOpenDialog }: DialogBoxInterface) {
   const { removeProductToCart, cart } = useEshopData();
@@ -30,9 +31,9 @@ function DialogCart({ setOpenDialog }: DialogBoxInterface) {
               <p>{item.eshop.price}</p>
             </div>
             <div className="dialog_cart_container_button">
-              <button>Blej</button>
-              <button>Vazhdo blerjen</button>
-              <button onClick={() => removeProductToCart(item.id)}>del</button>
+              <Button>Blej</Button>
+              <Button>Vazhdo blerjen</Button>
+              <Button onClick={() => removeProductToCart(item.id)}>del</Button>
             </div>
             <hr style={{ color: "rgb(196, 194, 194)" }} />
           </React.Fragment>

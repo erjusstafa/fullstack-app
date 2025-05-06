@@ -4,6 +4,7 @@ import { Product } from "../types";
 import "./style.scss";
 import buyButton from "../../../assets/buynow.png";
 import { Link } from "react-router-dom";
+import { Img } from "../../../shared/UI/Img";
 
 function Cards({
   item,
@@ -34,7 +35,7 @@ function Cards({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img
+        <Img
           src={item?.eshop?.media}
           alt={item?.eshop?.name}
           className="eshop_card_container_box_wrapper_imgCart"
@@ -47,12 +48,14 @@ function Cards({
         </span>
       </div>
       {isHovered && (
-        <img
+
+        <Img
           src={buyButton}
           onClick={(e) => e.preventDefault()}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className="hover_button"
+          alt="hovered"
         />
       )}
     </Link>

@@ -3,7 +3,8 @@ import { handleCustomAPI } from "../../../../api";
 import { Product } from "../../types";
 import "./style.scss";
 import RightMenu from "../../RightMenu";
-import { useGetDetail } from "../../../../api/methods";
+import { useGetDetail } from "../../../../api/queryHooks";
+import { Button } from "../../../../shared/UI/Button";
 
 type ApiResponse = {
   data: Product[];
@@ -54,7 +55,7 @@ function EshopPackageDetailsItem() {
               </tr>
             </tbody>
           </table>
-          <button className="buy-now">BUY NOW</button>
+          <Button className="buy-now">BUY NOW</Button>
         </div>
         <div className="info">
           <p>To purchase this package you must:</p>
