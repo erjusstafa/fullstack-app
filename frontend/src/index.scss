@@ -1,6 +1,17 @@
 @use "tailwindcss";
+@import "./styles/main.scss";
 
 
-.root{
-    position: relative !important;
+.root {
+  position: relative !important;
+}
+
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: white;
 }

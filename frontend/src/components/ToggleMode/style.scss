@@ -1,0 +1,52 @@
+
+@import "../../styles/variables";
+
+.toggle-mode{
+    display: flex;
+    align-items: center;
+}
+.theme-switcher {
+    position: relative;
+    display: inline-block;
+    width: $switch-width;
+    height: $switch-height;
+  }
+  
+  .theme-switcher-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .theme-switcher-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f5b01a;
+    transition: $switch-transition;
+    border-radius: $switch-border-radius;
+    border: 1px solid rgb(228, 228, 228);
+  }
+  
+  .theme-switcher-checkbox:checked + .theme-switcher-slider {
+    background-color: $primary-color;
+  }
+  
+  .theme-switcher-slider:before {
+    position: absolute;
+    content: "";
+    height: $switch-circle-size;
+    width: $switch-circle-size;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: $switch-transition;
+  }
+  
+  .theme-switcher-checkbox:checked + .theme-switcher-slider:before {
+    transform: translateX($switch-width - $switch-circle-size - 8px);
+  }

@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoadingSlider from "./shared/Loading";
 import { MainContextProvider } from "./contextApi";
+import "./styles/main.scss"; // Import the SCSS file
 
 // Lazy load the components
 const Individ = React.lazy(() => import("./pages/Inidivid"));
@@ -48,8 +49,7 @@ function App() {
 
   return (
     <>
-      <Header />
-
+      <Header  />
       <Suspense fallback={null}>
         {isLoading ? (
           <LoadingSlider />

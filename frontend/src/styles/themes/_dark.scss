@@ -1,0 +1,35 @@
+.dark {
+  body {
+    background-color: #662e8f;
+    color: #ffffff !important;
+  }
+
+  .header_menu__container {
+    border-bottom: 1px solid white;
+    > div:first-child {
+      margin-left: 8rem;
+    }
+  }
+  a {
+    color: #ffffff !important;
+  }
+
+  .filter_eshop_container {
+    color: rgb(0, 0, 0);
+  }
+  .filter_eshop_container {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    margin-top: 1rem;
+    border-radius: 1rem;
+    button {
+      background-color: #ffffff;
+      color: #000000;
+    }
+  }
+
+  .submenu_container {
+    background: #f5b01a !important;
+    color: #000000 !important;
+  }
+}

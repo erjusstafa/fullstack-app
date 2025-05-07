@@ -1,14 +1,17 @@
 import { ReactNode } from "react";
- import { LanguageProvider } from "./LanguageContext";
+import { LanguageProvider } from "./LanguageContext";
 import { AuthProvider } from "./AuthContext";
 import { EshopDataProvider } from "./EshopDataContext";
+import { ThemeProvider } from "./ThemeContext";
 
 export const MainContextProvider = ({ children }: { children: ReactNode }) => {
   return (
-    <AuthProvider>
-      <EshopDataProvider>
-        <LanguageProvider>{children}</LanguageProvider>
-      </EshopDataProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <EshopDataProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </EshopDataProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };

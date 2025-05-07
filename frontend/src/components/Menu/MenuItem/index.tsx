@@ -23,7 +23,7 @@ export const MenuItem: React.FC<{ item: menuInteface; level: number }> = ({
     onMouseLeave={() => setOpen(false)}  
     >
       <div>
-        <Link to={item.url} style={{ textDecoration: "none", color: "black" }}>
+        <Link to={item.url} style={{ textDecoration: "none", color: "black !important" }}>
           {item.title}
         </Link>
       </div>

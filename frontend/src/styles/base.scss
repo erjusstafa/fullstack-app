@@ -1,0 +1,18 @@
+// _theme.scss
+
+@import './variables';
+
+// Body styles for light and dark themes
+body {
+  transition: background-color $switch-transition, color $switch-transition;
+}
+
+body.dark {
+  background-color: $dark-bg;
+  color: $dark-text;
+}
+
+body.light {
+  background-color: $light-bg;
+  color: $light-text;
+}

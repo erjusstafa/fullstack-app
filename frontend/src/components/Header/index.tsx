@@ -8,11 +8,13 @@ import { useEshopData } from "../../contextApi/EshopDataContext";
 import { useGet } from "../../api/queryHooks";
 import { Img } from "../../shared/UI/Img";
 import { Input } from "../../shared/UI/Input";
+import ToggleMode from "../ToggleMode";
+import { useTheme } from "../../contextApi/ThemeContext";
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const { theme, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
   const { inputsearch, setinputSearch } = useEshopData();
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -96,7 +98,7 @@ const Header = () => {
                   }
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && inputsearch.trim()) {
-                      e.preventDefault(); 
+                      e.preventDefault();
                       navigate(`${encodeURIComponent(inputsearch.trim())}`);
                     }
                   }}
@@ -106,8 +108,10 @@ const Header = () => {
                       : "Çfarë po kërkoni?"
                   }
                 />
-              </div>
+
+               </div>
             </form>
+             
 
             <div className="headerLang">
               <a
@@ -122,6 +126,8 @@ const Header = () => {
               >
                 Al
               </a>
+
+              <ToggleMode isDarkMode={theme} toggleTheme= {toggleTheme} />
             </div>
           </div>
         </div>

@@ -31,7 +31,6 @@ function Eshop() {
   const fetchEshopData = (url: string) => handleCustomAPI<interfaceEshop>(url, "GET");
   const queryResult = useGet<interfaceEshop>(['eshops', language], `eshops?populate=*&locale=${language}`, fetchEshopData, data || undefined, true);
 
-
   useEffect(() => {
     if (queryResult.data) {
       setData(queryResult.data);
